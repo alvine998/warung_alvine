@@ -1,4 +1,4 @@
-import { ArchiveBoxIcon, ArrowLeftEndOnRectangleIcon, DocumentCheckIcon, DocumentTextIcon, HomeIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/24/solid'
+import { ArchiveBoxIcon, ArrowLeftEndOnRectangleIcon, CreditCardIcon, DocumentCheckIcon, DocumentTextIcon, HomeIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -28,6 +28,12 @@ export default function Sidebar() {
             href: "/admin/transaction",
             icon: <DocumentTextIcon className='w-5' />,
             active: router.pathname == "/admin/transaction"
+        },
+        {
+            name: "Pembayaran",
+            href: "/admin/payment",
+            icon: <CreditCardIcon className='w-5' />,
+            active: router.pathname == "/admin/payment"
         },
         {
             name: "Laporan",
