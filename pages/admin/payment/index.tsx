@@ -1,3 +1,4 @@
+import Header from '@/components/Header'
 import Layout from '@/components/Layout'
 import Modal from '@/components/Modal'
 import { useModal } from '@/hooks/modal'
@@ -46,19 +47,17 @@ export default function Payment() {
     }, [])
     return (
         <Layout>
-            <div className='bg-gradient-to-r from-green-300 to-green-400 w-full h-[60px] flex items-center px-10'>
-                <h2 className='text-xl font-bold'>Pembayaran</h2>
-            </div>
+            <Header title='Pembayaran' />
             <div className='mt-5 px-2'>
-                <div className='flex justify-between items-center'>
-                    <div>
+                <div className='flex justify-between items-center sm:flex-row flex-col-reverse gap-2'>
+                    <div className='sm:w-auto w-full'>
                         <button type='button' onClick={() => {
                             setModal({ ...modal, data: null, key: "create", open: true })
                         }} className='bg-blue-500 p-1 hover:bg-blue-400 duration-300 flex justify-center items-center gap-2 transition w-full h-auto rounded-md text-white'>
                             <PlusCircleIcon className='w-5' /> Tambah Data
                         </button>
                     </div>
-                    <div>
+                    <div className='sm:w-auto w-full'>
                         <input
                             name="search"
                             type="text"

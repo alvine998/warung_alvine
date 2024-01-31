@@ -49,9 +49,9 @@ export default function Sidebar() {
         },
         {
             name: "Logout",
-            href: "/logout",
+            href: "/login",
             icon: <ArrowLeftEndOnRectangleIcon className='w-5' />,
-            active: router.pathname == "/logout"
+            active: router.pathname == "/login"
         },
     ]
     return (

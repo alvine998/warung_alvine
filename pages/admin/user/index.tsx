@@ -1,5 +1,7 @@
+import Header from '@/components/Header'
 import Layout from '@/components/Layout'
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { useModal } from '@/hooks/modal'
+import { PencilSquareIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import DataTable from 'react-data-table-component'
 import Chart from 'react-google-charts'
@@ -16,14 +18,20 @@ const dummy = [
 ]
 
 export default function User() {
+    const [modal, setModal] = useModal();
     return (
         <Layout>
-            <div className='bg-gradient-to-r from-green-300 to-green-400 w-full h-[60px] flex items-center px-10'>
-                <h2 className='text-xl font-bold'>Pengguna</h2>
-            </div>
+            <Header title='Pengguna' />
             <div className='mt-5 px-2'>
-                <div className='flex justify-between items-center'>
-                    <div>
+                <div className='flex justify-between items-center sm:flex-row flex-col-reverse gap-2'>
+                    <div className='sm:w-auto w-full'>
+                        <button type='button' onClick={() => {
+                            setModal({ ...modal, data: null, key: "create", open: true })
+                        }} className='bg-blue-500 p-1 hover:bg-blue-400 duration-300 flex justify-center items-center gap-2 transition w-full h-auto rounded-md text-white'>
+                            <PlusCircleIcon className='w-5' /> Tambah Data
+                        </button>
+                    </div>
+                    <div className='sm:w-auto w-full'>
                         <input
                             name="search"
                             type="text"
