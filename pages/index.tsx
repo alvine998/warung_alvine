@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BanknotesIcon, ChevronDownIcon, CreditCardIcon, EnvelopeIcon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UserCircleIcon, WalletIcon, WifiIcon } from '@heroicons/react/24/solid'
 import Head from 'next/head'
-import { deposit, pulsa, wallet, withdraw } from '@/assets'
+import { deposit, nuvoblue, pulsa, wallet, withdraw } from '@/assets'
 import Image, { StaticImageData } from 'next/image'
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
         </div>
 
         {/* Content */}
-        <div className='py-4 px-2'>
+        <div className='py-4 px-2 pb-20'>
           <input
             name="search"
             type="search"
@@ -62,7 +62,7 @@ export default function Home() {
             className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-sm sm:leading-6"
           />
 
-          <div className='mt-7 px-4 flex gap-5 justify-start items-start'>
+          <div className='mt-7 px-4 flex gap-5 justify-center items-start'>
             <button className='flex flex-col justify-center items-center w-[80px]'>
               <Image src={pulsa} alt='withdraw' className='w-10' />
               Pulsa Data
@@ -81,7 +81,59 @@ export default function Home() {
             </button>
           </div>
 
+          {/* Produk Hari Ini */}
+          <div className='p-4 mt-5 flex justify-center items-center gap-2'>
+            <button className='shadow-lg rounded-lg border border-blue-400 p-2'>
+              <Image src={nuvoblue} alt='nuvo' className='w-[150px]' />
+              <p className=''>Sabun Nuvo Biru</p>
+              <p className='font-semibold'>Rp 5.000</p>
+              <button className='p-1 mt-2 bg-blue-500 hover:bg-blue-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                Beli
+              </button>
+              <button className='p-1 mt-2 bg-green-500 hover:bg-green-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                + Keranjang
+              </button>
+            </button>
 
+            <button className='shadow-lg rounded-lg border border-blue-400 p-2'>
+              <Image src={nuvoblue} alt='nuvo' className='w-[150px]' />
+              <p className=''>Sabun Nuvo Biru</p>
+              <p className='font-semibold'>Rp 5.000</p>
+              <button className='p-1 mt-2 bg-blue-500 hover:bg-blue-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                Beli
+              </button>
+              <button className='p-1 mt-2 bg-green-500 hover:bg-green-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                + Keranjang
+              </button>
+            </button>
+          </div>
+
+          {/* Produk Pilihan */}
+          <div className='p-4 mt-5 flex justify-center items-center gap-2'>
+            <button className='shadow-lg rounded-lg border border-blue-400 p-2'>
+              <Image src={nuvoblue} alt='nuvo' className='w-[150px]' />
+              <p className=''>Sabun Nuvo Biru</p>
+              <p className='font-semibold'>Rp 5.000</p>
+              <button className='p-1 mt-2 bg-blue-500 hover:bg-blue-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                Beli
+              </button>
+              <button className='p-1 mt-2 bg-green-500 hover:bg-green-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                + Keranjang
+              </button>
+            </button>
+
+            <button className='shadow-lg rounded-lg border border-blue-400 p-2'>
+              <Image src={nuvoblue} alt='nuvo' className='w-[150px]' />
+              <p className=''>Sabun Nuvo Biru</p>
+              <p className='font-semibold'>Rp 5.000</p>
+              <button className='p-1 mt-2 bg-blue-500 hover:bg-blue-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                Beli
+              </button>
+              <button className='p-1 mt-2 bg-green-500 hover:bg-green-400 duration-300 transition w-full h-auto rounded-md text-white'>
+                + Keranjang
+              </button>
+            </button>
+          </div>
         </div>
 
         {/* Bottom Tabs */}
