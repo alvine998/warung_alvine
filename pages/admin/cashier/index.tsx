@@ -1,8 +1,10 @@
+import Header from '@/components/Header'
 import Layout from '@/components/Layout'
 import Modal from '@/components/Modal'
+import SideOut from '@/components/SideOut'
 import { useModal } from '@/hooks/modal'
 import { formatRupiah } from '@/utils'
-import { BanknotesIcon, PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { BanknotesIcon, Bars3Icon, PlusCircleIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
 import DataTable from 'react-data-table-component'
 import ReactSelect from 'react-select'
@@ -96,6 +98,12 @@ export default function Cashier() {
     const addItems = async (e: any) => {
         e.preventDefault()
         try {
+            if (!item?.code) {
+                return Swal.fire({
+                    text: "Silahkan pilih produk terlebih dahulu!",
+                    icon: "warning"
+                })
+            }
             if (item?.total_item > item?.stock) {
                 return Swal.fire({
                     text: "Jumlah Produk Melebihi Batas Stok",
@@ -146,18 +154,20 @@ export default function Cashier() {
     return (
         <Layout>
             <div>
-                <div className='bg-gradient-to-r from-green-300 to-green-400 w-full h-[60px] flex items-center px-10'>
-                    <h2 className='text-xl font-bold'>Kasir</h2>
-                </div>
+                <Header title='Kasir' />
                 <div className='px-2 mt-5'>
                     <form onSubmit={addItems}>
+                        <label htmlFor="total" className="block text-lg font-medium leading-6 text-gray-500">
+                            Total Harga
+                        </label>
                         <input
+                            id='total'
                             name="total"
                             type="text"
                             placeholder='0'
                             value={formatRupiah(payload?.total)}
                             readOnly
-                            className="block w-full rounded-md border-0 py-1.5 px-4 h-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-3xl sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-4 h-20 mt-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none text-3xl sm:leading-6"
                         />
                         <div className='w-full'>
                             <label htmlFor="product" className="block text-sm font-medium leading-6 text-gray-500">
@@ -283,90 +293,92 @@ export default function Cashier() {
                             open={modal.open}
                             setOpen={() => { setModal({ ...modal, open: false }) }}
                         >
-                            <div className='flex flex-col justify-center items-center'>
-                                <h1 className='font-semibold text-lg'>Bayar</h1>
-                                <div className='w-full mt-2'>
-                                    <label htmlFor="payment" className="block text-sm font-medium leading-6 text-gray-500">
-                                        Pembayaran
-                                    </label>
-                                    <ReactSelect
-                                        className='z-50'
-                                        maxMenuHeight={150}
-                                        menuPortalTarget={document.body}
-                                        placeholder={"Pilih Pembayaran"}
-                                        options={[
-                                            { value: "cash", label: "Tunai" },
-                                            { value: "dana", label: "DANA" },
-                                            { value: "shopeepay", label: "Shopeepay" },
-                                            { value: "bca", label: "BCA" },
-                                            { value: "bni", label: "BNI" }
-                                        ]}
-                                        onChange={(e) => { setSelected(e?.value) }}
-                                        styles={{
-                                            input: (base) => ({
-                                                ...base,
-                                                "input:focus": {
-                                                    boxShadow: "none",
-                                                },
-                                                zIndex: 9999
-                                            }),
-                                            control: (base) => ({
-                                                ...base,
-                                                fontSize: "13px",
-                                                zIndex: 9999
-                                                // borderColor: error ? "red" : "#d1d5db",
-                                            }),
-                                            option: (base) => ({
-                                                ...base,
-                                                fontSize: "13px",
-                                                zIndex: 9999
-                                            }),
-                                            menuPortal: (base) => ({
-                                                ...base,
-                                                zIndex: 9999
-                                            })
-                                        }}
-                                    />
-                                </div>
-                                {
-                                    selected == "cash" ?
-                                        <div className='w-full mt-2'>
-                                            <label htmlFor="total_price" className="block text-sm font-medium leading-6 text-gray-500">
-                                                Uang Pembayaran
-                                            </label>
-                                            <input
-                                                id="total_price"
-                                                name="total_price"
-                                                placeholder='Total Harga'
-                                                value={payload?.pay}
-                                                type='text'
-                                                onChange={(e) => {
-                                                    const inputs = e.target.value?.replace(/\D/g, '')
-                                                    setPayload({
-                                                        ...payload,
-                                                        pay: inputs?.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
-                                                        value_changes: +e.target.value.replaceAll(",", '') - +payload?.total
-                                                    });
-                                                }}
-                                                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-sm sm:leading-6"
-                                            />
+                            <div className='w-full'>
+                                <form className='flex flex-col justify-center items-center' onSubmit={() => { }}>
+                                    <h1 className='font-semibold text-lg'>Bayar</h1>
+                                    <div className='w-full mt-2'>
+                                        <label htmlFor="payment" className="block text-sm font-medium leading-6 text-gray-500">
+                                            Pembayaran
+                                        </label>
+                                        <ReactSelect
+                                            className='z-50'
+                                            maxMenuHeight={150}
+                                            menuPortalTarget={document.body}
+                                            placeholder={"Pilih Pembayaran"}
+                                            options={[
+                                                { value: "cash", label: "Tunai" },
+                                                { value: "dana", label: "DANA" },
+                                                { value: "shopeepay", label: "Shopeepay" },
+                                                { value: "bca", label: "BCA" },
+                                                { value: "bni", label: "BNI" }
+                                            ]}
+                                            onChange={(e) => { setSelected(e?.value) }}
+                                            styles={{
+                                                input: (base) => ({
+                                                    ...base,
+                                                    "input:focus": {
+                                                        boxShadow: "none",
+                                                    },
+                                                    zIndex: 9999
+                                                }),
+                                                control: (base) => ({
+                                                    ...base,
+                                                    fontSize: "13px",
+                                                    zIndex: 9999
+                                                    // borderColor: error ? "red" : "#d1d5db",
+                                                }),
+                                                option: (base) => ({
+                                                    ...base,
+                                                    fontSize: "13px",
+                                                    zIndex: 9999
+                                                }),
+                                                menuPortal: (base) => ({
+                                                    ...base,
+                                                    zIndex: 9999
+                                                })
+                                            }}
+                                        />
+                                    </div>
+                                    {
+                                        selected == "cash" ?
+                                            <div className='w-full mt-2'>
+                                                <label htmlFor="total_price" className="block text-sm font-medium leading-6 text-gray-500">
+                                                    Uang Pembayaran
+                                                </label>
+                                                <input
+                                                    id="total_price"
+                                                    name="total_price"
+                                                    placeholder='Total Harga'
+                                                    value={payload?.pay}
+                                                    type='text'
+                                                    onChange={(e) => {
+                                                        const inputs = e.target.value?.replace(/\D/g, '')
+                                                        setPayload({
+                                                            ...payload,
+                                                            pay: inputs?.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                                                            value_changes: +e.target.value.replaceAll(",", '') - +payload?.total
+                                                        });
+                                                    }}
+                                                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-sm sm:leading-6"
+                                                />
 
-                                            <label htmlFor="value_changes" className="block text-sm font-medium leading-6 text-gray-500">
-                                                Sisa Kembalian
-                                            </label>
-                                            <input
-                                                id="value_changes"
-                                                name="value_changes"
-                                                placeholder='Total Harga'
-                                                value={formatRupiah(payload?.value_changes)}
-                                                readOnly
-                                                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-sm sm:leading-6"
-                                            />
-                                        </div> : ""
-                                }
-                                <button type='submit' className='bg-blue-500 p-2 mt-4 hover:bg-blue-400 duration-300 flex justify-center items-center gap-2 transition w-full h-auto rounded-md text-white'>
-                                    Bayar
-                                </button>
+                                                <label htmlFor="value_changes" className="block text-sm font-medium leading-6 text-gray-500">
+                                                    Sisa Kembali
+                                                </label>
+                                                <input
+                                                    id="value_changes"
+                                                    name="value_changes"
+                                                    placeholder='Sisa Kembali'
+                                                    value={formatRupiah(payload?.value_changes)}
+                                                    readOnly
+                                                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 focus:outline-none sm:text-sm sm:leading-6"
+                                                />
+                                            </div> : ""
+                                    }
+                                    <button type='submit' className='bg-blue-500 p-2 mt-4 hover:bg-blue-400 duration-300 flex justify-center items-center gap-2 transition w-full h-auto rounded-md text-white'>
+                                        Bayar
+                                    </button>
+                                </form>
                             </div>
                         </Modal> : ""
                 }

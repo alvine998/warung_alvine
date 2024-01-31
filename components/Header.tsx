@@ -1,8 +1,15 @@
+import React, { Fragment, useState } from 'react'
+import SideOut from './SideOut';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 import { ArchiveBoxIcon, ArrowLeftEndOnRectangleIcon, CreditCardIcon, DocumentCheckIcon, DocumentTextIcon, HomeIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/24/solid'
-import { useRouter } from 'next/router'
-import React from 'react'
+import { useRouter } from 'next/router';
 
-export default function Sidebar() {
+type Props = {
+    title: string;
+}
+
+export default function Header(props: Props) {
+    const [isOpen, setIsOpen] = useState<boolean>(false)
     const router = useRouter();
     const navigations: any[] = [
         {
@@ -54,19 +61,29 @@ export default function Sidebar() {
             active: router.pathname == "/logout"
         },
     ]
+
+
     return (
-        <div className='bg-blue-500 h-[100vh] w-[250px] sm:block hidden'>
-            <div className='flex justify-center items-center mt-5'>
-                <a href="/admin/dashboard" className='text-white text-xl font-semibold' >Warung Alvine</a>
-            </div>
-            <div className='mt-5'>
-                {
-                    navigations?.map((val: any, idx: number) => (
-                        <button onClick={()=>{router.push(val?.href)}} key={idx} className={`flex gap-2 text-lg items-center w-full pl-5 py-2 ${val?.active ? 'bg-white text-black' : 'text-white duration-300 transition-all hover:bg-white hover:text-black'}`}>
-                            {val?.icon} {val?.name}
-                        </button>
-                    ))
-                }
+        <div>
+            <SideOut isOpen={isOpen} setIsOpen={setIsOpen}>
+                <div className='flex justify-center items-center mt-2'>
+                    <a href="#" className='font-bold text-2xl'>Warung Alvine</a>
+                </div>
+                <div className='flex flex-col gap-4 mt-5'>
+                    {
+                        navigations?.map((val:any, idx:number) => (
+                            <div key={idx} className={val?.active ? "bg-blue-500 w-full px-5 py-2 text-white" : "px-5 hover:text-white hover:bg-blue-500 w-full hover:py-2"}>
+                                <a href={val?.href} className='flex gap-2 text-xl'>{val?.icon}{val?.name}</a>
+                            </div>
+                        ))
+                    }
+                </div>
+            </SideOut>
+            <div className='bg-gradient-to-r from-green-300 to-green-400 w-full h-[60px] flex justify-between items-center px-5 sm:px-10'>
+                <h2 className='text-xl font-bold'>{props.title}</h2>
+                <button className='sm:hidden block' type='button' onClick={() => { setIsOpen(true) }}>
+                    <Bars3Icon className='w-6 text-black' />
+                </button>
             </div>
         </div>
     )
