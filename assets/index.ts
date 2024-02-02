@@ -6,6 +6,7 @@ import wallet from './icons/wallet.png';
 
 // images
 import nuvoblue from './images/nuvo-blue.png';
+import logo from './images/logo.png';
 
 export {
     deposit,
@@ -13,5 +14,6 @@ export {
     pulsa,
     kuota,
     wallet,
-    nuvoblue
+    nuvoblue,
+    logo
 }

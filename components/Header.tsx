@@ -56,9 +56,9 @@ export default function Header(props: Props) {
         },
         {
             name: "Logout",
-            href: "/login",
+            href: "/admin/login",
             icon: <ArrowLeftEndOnRectangleIcon className='w-5' />,
-            active: router.pathname == "/login"
+            active: router.pathname == "/admin/login"
         },
     ]
 
