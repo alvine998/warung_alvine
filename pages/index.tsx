@@ -261,7 +261,7 @@ export default function Home() {
               </div>
 
               {/* Bottom Tabs */}
-              <div className='fixed bottom-0 w-full bg-gradient-to-r from-blue-400 to-blue-500 h-[60px] p-2'>
+              <div className='fixed bottom-0 w-full bg-gradient-to-r from-blue-400 to-blue-500 h-[60px] px-1 py-2'>
                 <div className='flex justify-center items-center gap-4'>
                   <button type='button' className='flex flex-col text-white items-center justify-center w-[60px]' onClick={() => { }}>
                     <HomeIcon className='w-7' />
@@ -271,7 +271,7 @@ export default function Home() {
                     <ShoppingCartIcon className='w-7' />
                     Pesanan
                   </button>
-                  <button type='button' className='flex flex-col text-blue-500 items-center justify-center bg-white w-[80px] h-[80px] rounded-full -mt-16 outline outline-blue-300 shadow-lg' onClick={() => { }}>
+                  <button type='button' className='flex flex-col text-blue-500 items-center justify-center bg-white w-[90px] h-[80px] rounded-full -mt-16 outline outline-blue-300 shadow-lg' onClick={() => { }}>
                     <ShoppingBagIcon className='w-10' />
                     Belanja
                   </button>
